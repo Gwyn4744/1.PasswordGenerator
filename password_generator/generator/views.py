@@ -10,7 +10,16 @@ def home(request):
 def password(request):
 
     characters = list('qwertyuiopasdfghjklzxcvbnm')
-    length = 10
+
+    if request.GET.get('uppercase'):
+        characters.extend(list('QWERTYUIOPASDFGHJKLZXCVBNM'))
+    if request.GET.get('special'):
+        characters.extend(list('!@#$%^&*()'))
+    if request.GET.get('numbers'):
+        characters.extend(list('1234567890'))
+
+    length = int(request.GET.get('length', 12))
+
 
     my_password = ''
     for x in range(length):
